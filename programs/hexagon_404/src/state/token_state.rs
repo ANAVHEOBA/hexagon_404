@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
+#[derive(Default)]
 pub struct TokenAccount {
     pub owner: Pubkey,
     pub balance: u64,

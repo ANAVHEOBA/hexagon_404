@@ -1,7 +1,7 @@
-pub mod config;
-pub mod token_state;
-pub mod schedule;
+mod config;
+mod token_state;
+mod schedule;
 
-pub use config::*;
-pub use token_state::*;
+pub use config::Config;
+pub use token_state::TokenAccount;
 pub use schedule::*;

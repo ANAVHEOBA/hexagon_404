@@ -10,7 +10,9 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = authority,
-        space = 8 + Config::LEN
+        space = 8 + Config::LEN, 
+        seeds = [b"config"],  
+        bump                  
     )]
     pub config: Account<'info, Config>,
     #[account(
@@ -50,8 +52,9 @@ pub fn handler(
     config.last_mint_timestamp = Clock::get()?.unix_timestamp;
     config.initialized = true;
 
-    // Calculate initial supply with decimals
-    let initial_supply = MINT_AMOUNT * 10u64.pow(TOKEN_DECIMALS as u32);
+    // Calculate initial supply with decimals (21M tokens with 9 decimals)
+    let initial_supply = MINT_AMOUNT.checked_mul(10u64.pow(TOKEN_DECIMALS as u32))
+        .ok_or(ErrorCode::Overflow)?;
     
     // Set initial supply
     config.total_supply = initial_supply;

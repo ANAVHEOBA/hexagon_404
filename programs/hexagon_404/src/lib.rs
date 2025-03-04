@@ -6,6 +6,9 @@ pub mod errors;
 pub mod instructions;
 pub mod state;
 
+// Import state structs
+use state::{Config, TokenAccount};
+
 // Import instruction structs directly
 use instructions::{
     initialize::*,
@@ -14,11 +17,12 @@ use instructions::{
     admin::*,
 };
 
-declare_id!("GFt6B8deNhoK1S4kmU6Ko8dztqmc2zJ3tReMXG4DNSd7");
+declare_id!("6BAVaAjXJmFWsYoWe2WRRTjGsvrt6U9PPMB6SBnb1V4H");
 
 #[program]
 pub mod hexagon_404 {
     use super::*;
+    use crate::state::{Config, TokenAccount};
 
     // Initialize the token program
     pub fn initialize(

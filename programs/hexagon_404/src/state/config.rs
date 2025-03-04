@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
+#[derive(Default)]
 pub struct Config {
     pub authority: Pubkey,
     pub token_name: String,
